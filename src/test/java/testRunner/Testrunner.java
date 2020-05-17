@@ -6,7 +6,7 @@ import cucumber.api.junit.Cucumber;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-		features="src/test/resources/Features/Login.feature",
+		features="src/test/resources/Features/Customers.feature",
 		glue="stepDefinitions",
 		dryRun=false,
 		monochrome=true,
@@ -14,5 +14,6 @@ import cucumber.api.junit.Cucumber;
 		)
 
 public class Testrunner {
+	
 
 }
