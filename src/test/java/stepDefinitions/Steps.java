@@ -11,6 +11,7 @@ import cucumber.api.java.en.When;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import pageObjects.AddcustomerPage;
 import pageObjects.LoginPage;
+import pageObjects.SearchCustomerPage;
 
 public class Steps extends BaseClass {
 
@@ -107,13 +108,13 @@ public class Steps extends BaseClass {
 		String email = randomstring() + "@gmail.com";
 		addCust.setEmail(email);
 		addCust.setPasssword("test123");
-		addCust.setCustomerRoles("Guest");
+		//addCust.setCustomerRoles("Guest");//
 		Thread.sleep(2000);
 		addCust.setManagerOfVendor("Vendor 2");
-		addCust.setGender("Male");
-		addCust.setFirstName("Ralph");
-		addCust.setLastName("Gill");
-		addCust.setDob("9/05/1975");
+		addCust.setGender("Female");
+		addCust.setFirstName("Diana");
+		addCust.setLastName("Ross");
+		addCust.setDob("09/06/1935");
 		addCust.setCompanyName("LearningAutomation");
 		addCust.setAdminContent("This is my testing session");
 
@@ -129,8 +130,40 @@ public class Steps extends BaseClass {
 	@Then("^User can view confirmation message \"([^\"]*)\"$")
 	public void user_can_view_confirmation_message(String msg) throws Throwable {
 		Assert.assertTrue(driver.findElement(By.tagName("body")).getText()
-				.contains("The customer cannot be in both 'Guests' and 'Registered' customer roles"));
+				.contains("The new customer has been added successfully"));
 
+	}
+
+	// steps for search features
+	@When("^User click on customers Menu$")
+	public void user_click_on_customers_Menu() throws Throwable {
+		Thread.sleep(3000);
+		addCust.clickCustomersMenu();
+
+	}
+
+	@When("^click on customers Menu Item$")
+	public void click_on_customers_Menu_Item() throws Throwable {
+		Thread.sleep(2000);
+		addCust.clickOnCustomersMenuItem();
+	}
+
+	@When("^Enter customer Email$")
+	public void enter_customer_Email() throws Throwable {
+		searchCust = new SearchCustomerPage(driver);
+		searchCust.setEmails("victoria_victoria@nopCommerce.com");
+	}
+
+	@When("^Click on search button$")
+	public void click_on_search_button() throws InterruptedException {
+		searchCust.clickSearch();
+		Thread.sleep(3000);
+	}
+
+	@Then("^User should found Email in the Search table$")
+	public void user_should_found_Email_in_the_Search_table() throws Throwable {
+        boolean status= searchCust.searchCustomerByEmail("victoria_victoria@nopCommerce.com");
+       Assert.assertEquals(true, status);
 	}
 
 }
