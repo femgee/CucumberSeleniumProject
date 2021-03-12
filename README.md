@@ -1,4 +1,5 @@
 # CucumberSeleniumProject
 #Testing session
 #I am checking build version
-Traing about continous deloyment
+Training about continous deloyment
+Azure CI/CD process setup
